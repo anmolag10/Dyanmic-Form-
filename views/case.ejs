@@ -1,0 +1,100 @@
+<%- include("header") %>
+<section id="titlesec">
+
+    <h1 class="title" ><%=caseStudy.title%></h1>
+    <h2 class="des"> Description :</h2>
+    <p class="para"> <%=caseStudy.descrip%></p>
+  </section>
+ <div class="form-group container-fluid">
+    <form  action ="/submission" method="POST">
+    
+        <p class="labsyn">Write your synopsis in not more than 6000 characters.</p>
+        <p  id="lc">Characters left: </p>>
+        <input disabled   maxlength="3" size="3" value="6000" id="counter">
+        <textarea class="form-control synopsis textarea"  name="casetext" id="text"  rows="20" cols="10" onkeyup="textCounter(this,'counter',6000);" placeholder="Start writing here...."></textarea>
+        <button type="button submit " style="width: 126px;" class="btn btn-primary" name="rid" value="<%=caseStudy.id%>">Submit</button>
+    </form>
+  
+   
+
+  
+  </div>
+ 
+    
+
+<% var ms =time.getTime() %>
+
+<div id="mydiv" data-test=<%=ms%>></div>
+<div id="timer">
+  <label> Timer: </label>
+    <span id="hours"></span>hours 
+    <span id="minutes"></span>minutes
+    <span id="seconds"></span>seconds
+  </div>
+
+<script>
+   var timer;
+   
+   var str =  document.getElementById('mydiv').dataset.test;
+   console.log(str);
+
+   var newDate = new Date(Number(str));
+var compareDate= newDate;
+compareDate.setHours(compareDate.getHours() + 12);
+
+timer = setInterval(function() {
+  timeBetweenDates(compareDate);
+}, 1000);
+
+function timeBetweenDates(toDate) {
+  var dateEntered = toDate;
+  var now = new Date();
+  var difference = dateEntered.getTime() - now.getTime();
+
+  if (difference <= 0) {
+
+       console.log("Switch off the timer");
+        $("button").prop('disabled', true);
+    $("#days").text(0);
+    $("#hours").text(0);
+    $("#minutes").text(0);
+    $("#seconds").text(0);
+  
+  } else {
+    
+    var seconds = Math.floor(difference / 1000);
+    var minutes = Math.floor(seconds / 60);
+    var hours = Math.floor(minutes / 60);
+    var days = Math.floor(hours / 24);
+
+    hours %= 24;
+    minutes %= 60;
+    seconds %= 60;
+    
+
+    $("#days").text(days);
+    $("#hours").text(hours);
+    $("#minutes").text(minutes);
+    $("#seconds").text(seconds);
+  }
+}
+
+function textCounter(field,field2,maxlimit)
+{
+ var countfield = document.getElementById(field2);
+
+ if ( field.value.length > maxlimit ) {
+  field.value = field.value.substring( 0, maxlimit );
+  return false;
+ } else {
+  countfield.value = maxlimit - field.value.length;
+  console.log(field.value.length);
+ }
+ 
+}
+
+
+
+</script>
+
+<%- include("footer") %>
