@@ -66,7 +66,7 @@ app.post("/:id", (req, res) => {
         }
 
         else {
-            res.render("Unauthorised");
+            res.render("unauthorised");
         }
     }
 
