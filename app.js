@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://admin-anmol:anmol@cluster0.jdzqr.mongodb.net/FinalTask", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://admin-xxxx:xxxx@cluster0.jdzqr.mongodb.net/FinalTask", { useNewUrlParser: true });
+//replace xxxx:xxxx
 app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
